@@ -1,6 +1,6 @@
 # IGB4MTL
 
-Official implementation of _"Improvable Gap Balancing for Multi-Task Learning"_.
+Official implementation of _"Improvable Gap Balancing for Multi-Task Learning"_, which has been accepted to UAI 2023.
 
 ## Setup environment
 

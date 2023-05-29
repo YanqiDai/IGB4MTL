@@ -5,9 +5,9 @@ Official implementation of _"Improvable Gap Balancing for Multi-Task Learning"_.
 ## Setup environment
 
 ```bash
-conda create -n igbmtl python=3.9.7
-conda activate igbmtl
-conda install pytorch==1.9.0 torchvision==0.10.0 cudatoolkit=10.2 -c pytorch
+conda create -n igb4mtl python=3.8.13
+conda activate igb4mtl
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=10.2 -c pytorch
 ```
 
 Install the repo:
@@ -15,7 +15,7 @@ Install the repo:
 ```bash
 git clone https://github.com/YanqiDai/IGB4MTL.git
 cd IGB4MTL
-pip install -e .
+pip install -r requirement.txt
 ```
 
 ## Run experiment

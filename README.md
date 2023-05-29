@@ -20,38 +20,43 @@ pip install -r requirement.txt
 
 ## Run experiment
 
-To run experiments:
+Follow instruction on the experiment README file for more information regarding, e.g., datasets.
+
+We support our IGB methods and other existing MTL methods with a unified API. To run experiments:
 
 ```bash
 cd experiments/<expirimnet name>
-python trainer.py --loss_method=<igb method name>
+python trainer.py --loss_method=<loss balancing method> --gradient_method=<gradient balancing method>
 ```
-Follow instruction on the experiment README file for more information regarding, e.g., datasets.  
-
-Here `<experiment name>` is one of `[toy, quantum_chemistry, nyuv2]`. You can also replace `nashmtl` with on of the following MTL methods.
-
-We also support experiment tracking with **[Weights & Biases](https://wandb.ai/site)** with two additional parameters:
-
-```bash
-python trainer.py --method=nashmtl --wandb_project=<project-name> --wandb_entity=<entity-name>
-```
+  
+Here,
+- `<experiment name>` is one of `[quantum_chemistry, nyuv2]`.
+- `<loss balancing method>` is one of `igbv1`, `igbv2` and the following loss balancing MTL methods.
+- `<gradient balancing method>` is one of the following gradient balancing MTL methods.
+- Both `<loss balancing method>` and `<gradient balancing method>` are optional:
+  - only using `<loss balancing method>` is to run a loss balancing method;
+  - only using `<gradient balancing method>` is to run a gradient balancing method;
+  - using neither is to run Equal Weighting (EW) method.
+  - using both is to run a combined MTL method by both loss balancing and gradient balancing.
 
 ## MTL methods
 
-We support the following MTL methods with a unified API. To run experiment with MTL method `X` simply run:
-```bash
-python trainer.py --method=X
-```
+We support the following loss balancing and gradient balancing methods.
 
-| Method (code name) | Paper (notes) |
-| :---: | :---: |
-| Nash-MTL (`nashmtl`) | [Multi-Task Learning as a Bargaining Game](https://arxiv.org/pdf/2202.01017v1.pdf) |
-| CAGrad (`cagrad`) | [Conflict-Averse Gradient Descent for Multi-task Learning](https://arxiv.org/pdf/2110.14048.pdf) |
-| PCGrad (`pcgrad`) | [Gradient Surgery for Multi-Task Learning](https://arxiv.org/abs/2001.06782) |
-| IMTL-G (`imtl`) | [Towards Impartial Multi-task Learning](https://openreview.net/forum?id=IMPnRXEWpvr) |
-| MGDA (`mgda`) | [Multi-Task Learning as Multi-Objective Optimization](https://arxiv.org/abs/1810.04650) |
-| DWA (`dwa`) | [End-to-End Multi-Task Learning with Attention](https://arxiv.org/abs/1803.10704) |
-| Uncertainty weighting (`uw`) | [Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics](https://arxiv.org/pdf/1705.07115v3.pdf) |
-| Linear scalarization (`ls`) | - (equal weighting) |
-| Scale-invariant baseline (`scaleinvls`) | - (see Nash-MTL paper for details) |
-| Random Loss Weighting (`rlw`) | [A Closer Look at Loss Weighting in Multi-Task Learning](https://arxiv.org/pdf/2111.10603.pdf) |
+|   Loss Balancing Method (code name)   |                                                          Paper (notes)                                                           |
+|:-------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:|
+|        Equal Weighting (`ls`)         |                                                     - (linear scalarization)                                                     |
+|     Random Loss Weighting (`rlw`)     |                  [A Closer Look at Loss Weighting in Multi-Task Learning](https://arxiv.org/pdf/2111.10603.pdf)                  |
+|    Dynamic Weight Average (`dwa`)     |                        [End-to-End Multi-Task Learning with Attention](https://arxiv.org/abs/1803.10704)                         |
+|     Uncertainty Weighting (`uw`)      | [Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics](https://arxiv.org/pdf/1705.07115v3.pdf) |
+| Improvable Gap Balancing v1 (`igbv1`) |                                                     - (our first IGB method)                                                     |
+| Improvable Gap Balancing v1 (`igbv1`) |                                                    - (our second IGB method)                                                     |
+
+
+| Gradient Balancing Method (code name) |                                          Paper (notes)                                           |
+|:-------------------------------------:|:------------------------------------------------------------------------------------------------:|
+|             MGDA (`mgda`)             |     [Multi-Task Learning as Multi-Objective Optimization](https://arxiv.org/abs/1810.04650)      |
+|           PCGrad (`pcgrad`)           |           [Gradient Surgery for Multi-Task Learning](https://arxiv.org/abs/2001.06782)           |
+|           CAGrad (`cagrad`)           | [Conflict-Averse Gradient Descent for Multi-task Learning](https://arxiv.org/pdf/2110.14048.pdf) |
+|            IMTL-G (`imtl`)            |       [Towards Impartial Multi-task Learning](https://openreview.net/forum?id=IMPnRXEWpvr)       |
+|         Nash-MTL (`nashmtl`)          |        [Multi-Task Learning as a Bargaining Game](https://arxiv.org/pdf/2202.01017v1.pdf)        |
